@@ -1,0 +1,12 @@
+Package: FunTest
+Type: Package
+Title: Functional Independence Test
+Version: 0.1.0
+Author: Bilol Banerjee
+Maintainer: <banerjeebilol@gmail.com>
+Description: This package implements the independnece esting procedure that we have built and working on. I might add new testing procedures in future.
+License: MIT License
+Encoding: UTF-8
+LazyData: true
+Imports: Rcpp (>= 1.0.7)
+LinkingTo: Rcpp
