@@ -11,7 +11,7 @@ phsic.test = function(data, time, alpha = 0.05, R = 100)
   l = as.numeric(lapply(data, nrow))
   p = length(data)
   x = rep(nrow(data[[1]]),p)
-  if(all(l == x) & q>0 & alpha>0 & R>1){
+  if(all(l == x) & alpha>0 & R>1){
     b = band.selection(data,time, 0.5)
     D = lapply(data, proj_cpp, argval = time)
     T_0 = stat(D, b)
