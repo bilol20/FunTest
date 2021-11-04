@@ -19,7 +19,7 @@ phsic.test = function(data, time, alpha = 0.05, R = 100)
     q = quantile(T,1-alpha)
     e = list(
       Estimate = T_0,
-      p.value = mean(T>T_0),
+      p.value = (sum(T>T_0)+1)/(R+1),
       permutation.repetition = R,
       sample.size = l[1])
     return(e)
@@ -48,9 +48,9 @@ phsic.MultiTest = function(data, time, q = c(0.5,0.4,0.3,0.2,0.1,0.05), alpha = 
     for(i in 1:n) T_0[i] = stat(D, b[i])
     A = multi_permutation(D,R,b)
     T = apply(A,1,sum)
-    q1 = mean(T>sum(T_0))
+    q1 = (sum(T>sum(T_0))+1)/(R+1)
     T = apply(A,1,max)
-    q2 = mean(T>max(T_0))
+    q2 = (sum(T>max(T_0))+1)/(R+1)
     for(i in 1:n){p[i] = mean(A[,i]>T_0[i])}
     e = list(
       Estimates = T_0,
