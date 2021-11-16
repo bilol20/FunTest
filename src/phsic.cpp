@@ -235,10 +235,9 @@ NumericMatrix multi_permutation(List D, int R, NumericVector b)
   List l(d);
   List K(d);
   List D1(d);
-  D1[0] = D[0];
   for(int k = 0; k<R; k++)
   {
-    for(int j=1; j<d; j++)
+    for(int j=0; j<d; j++)
     {
       D1[j] = rowcolsam(D[j]);
     }
