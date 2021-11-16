@@ -25,9 +25,8 @@ List median_huristic(List list, NumericVector time){
       for(k = j+1; k<n; k++){
         for(l = 0; l<d;l++){
           NumericMatrix A = list[l];
-          B(j,k) = B(j,k) + inp(A(i,_),A(j,_)-A(k,_),time);
+          B(j,k) = B(j,k) + inp(A(i,_),A(j,_)-A(k,_),time)*inp(A(i,_),A(j,_)-A(k,_),time);
         }
-        B(j,k) = B(j,k)*B(j,k);
       }
     }
     s[i] = B;
