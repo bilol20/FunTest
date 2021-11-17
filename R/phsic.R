@@ -51,7 +51,7 @@ phsic.MultiTest = function(data, time, q = c(0.5,0.4,0.3,0.2,0.1,0.05), alpha = 
     q1 = (sum(T>sum(T_0))+1)/(R+1)
     T = apply(A,1,max)
     q2 = (sum(T>max(T_0))+1)/(R+1)
-    for(i in 1:n){p[i] = mean(A[,i]>T_0[i])}
+    for(i in 1:n){p[i] = (sum(A[,i]>T_0[i])+1)/(R+1)}
     e = list(
       Estimates = T_0,
       Sum.Estimate = sum(T_0),
