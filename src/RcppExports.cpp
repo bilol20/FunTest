@@ -35,6 +35,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// median_huristic_2
+List median_huristic_2(List list, NumericVector time);
+RcppExport SEXP _FunTest_median_huristic_2(SEXP listSEXP, SEXP timeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type list(listSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type time(timeSEXP);
+    rcpp_result_gen = Rcpp::wrap(median_huristic_2(list, time));
+    return rcpp_result_gen;
+END_RCPP
+}
 // proj_cpp
 NumericMatrix proj_cpp(NumericMatrix x, NumericVector argval);
 RcppExport SEXP _FunTest_proj_cpp(SEXP xSEXP, SEXP argvalSEXP) {
@@ -150,6 +162,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// stat_2
+double stat_2(List D, List b);
+RcppExport SEXP _FunTest_stat_2(SEXP DSEXP, SEXP bSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type D(DSEXP);
+    Rcpp::traits::input_parameter< List >::type b(bSEXP);
+    rcpp_result_gen = Rcpp::wrap(stat_2(D, b));
+    return rcpp_result_gen;
+END_RCPP
+}
 // rowcolsam
 NumericMatrix rowcolsam(NumericMatrix A);
 RcppExport SEXP _FunTest_rowcolsam(SEXP ASEXP) {
@@ -174,6 +198,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// permutation_2
+NumericVector permutation_2(List D, int R, List b);
+RcppExport SEXP _FunTest_permutation_2(SEXP DSEXP, SEXP RSEXP, SEXP bSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type D(DSEXP);
+    Rcpp::traits::input_parameter< int >::type R(RSEXP);
+    Rcpp::traits::input_parameter< List >::type b(bSEXP);
+    rcpp_result_gen = Rcpp::wrap(permutation_2(D, R, b));
+    return rcpp_result_gen;
+END_RCPP
+}
 // multi_permutation
 NumericMatrix multi_permutation(List D, int R, NumericVector b);
 RcppExport SEXP _FunTest_multi_permutation(SEXP DSEXP, SEXP RSEXP, SEXP bSEXP) {
@@ -191,6 +228,7 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_FunTest_inp", (DL_FUNC) &_FunTest_inp, 3},
     {"_FunTest_median_huristic", (DL_FUNC) &_FunTest_median_huristic, 2},
+    {"_FunTest_median_huristic_2", (DL_FUNC) &_FunTest_median_huristic_2, 2},
     {"_FunTest_proj_cpp", (DL_FUNC) &_FunTest_proj_cpp, 2},
     {"_FunTest_perm", (DL_FUNC) &_FunTest_perm, 1},
     {"_FunTest_summat", (DL_FUNC) &_FunTest_summat, 1},
@@ -201,8 +239,10 @@ static const R_CallMethodDef CallEntries[] = {
     {"_FunTest_g_cpp", (DL_FUNC) &_FunTest_g_cpp, 1},
     {"_FunTest_gaussian_kernel", (DL_FUNC) &_FunTest_gaussian_kernel, 2},
     {"_FunTest_stat", (DL_FUNC) &_FunTest_stat, 2},
+    {"_FunTest_stat_2", (DL_FUNC) &_FunTest_stat_2, 2},
     {"_FunTest_rowcolsam", (DL_FUNC) &_FunTest_rowcolsam, 1},
     {"_FunTest_permutation", (DL_FUNC) &_FunTest_permutation, 3},
+    {"_FunTest_permutation_2", (DL_FUNC) &_FunTest_permutation_2, 3},
     {"_FunTest_multi_permutation", (DL_FUNC) &_FunTest_multi_permutation, 3},
     {NULL, NULL, 0}
 };

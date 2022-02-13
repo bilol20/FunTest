@@ -9,6 +9,10 @@ median_huristic <- function(list, time) {
     .Call(`_FunTest_median_huristic`, list, time)
 }
 
+median_huristic_2 <- function(list, time) {
+    .Call(`_FunTest_median_huristic_2`, list, time)
+}
+
 proj_cpp <- function(x, argval) {
     .Call(`_FunTest_proj_cpp`, x, argval)
 }
@@ -49,12 +53,20 @@ stat <- function(D, b) {
     .Call(`_FunTest_stat`, D, b)
 }
 
+stat_2 <- function(D, b) {
+    .Call(`_FunTest_stat_2`, D, b)
+}
+
 rowcolsam <- function(A) {
     .Call(`_FunTest_rowcolsam`, A)
 }
 
 permutation <- function(D, R, b) {
     .Call(`_FunTest_permutation`, D, R, b)
+}
+
+permutation_2 <- function(D, R, b) {
+    .Call(`_FunTest_permutation_2`, D, R, b)
 }
 
 multi_permutation <- function(D, R, b) {
