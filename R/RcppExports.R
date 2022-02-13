@@ -73,3 +73,7 @@ multi_permutation <- function(D, R, b) {
     .Call(`_FunTest_multi_permutation`, D, R, b)
 }
 
+multi_permutation_2 <- function(D, R, b) {
+    .Call(`_FunTest_multi_permutation_2`, D, R, b)
+}
+

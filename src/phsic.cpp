@@ -211,7 +211,7 @@ double stat(List D, double b)
 }
 
 //[[Rcpp::export]]
-double stat_2(List D, List b)
+double stat_2(List D, NumericVector b)
 {
   int d = D.length();
   NumericMatrix A = D[0];
@@ -272,7 +272,7 @@ NumericVector permutation(List D, int R, double b)
 
 
 //[[Rcpp::export]]
-NumericVector permutation_2(List D, int R, List b)
+NumericVector permutation_2(List D, int R, NumericVector b)
 {
   int d = D.length();
   NumericMatrix A = D[0];
@@ -321,6 +321,32 @@ NumericMatrix multi_permutation(List D, int R, NumericVector b)
   return(T);
 }
 
+//[[Rcpp::export]]
+NumericMatrix multi_permutation_2(List D, int R, NumericMatrix b)
+{
+  int d = D.length();
+  NumericMatrix A = D[0];
+  int N = A.nrow();
+  NumericVector q(N);
+  int n = b.nrow();
+  NumericMatrix T(R,n);
+  List l(d);
+  List K(d);
+  List D1(d);
+  D1[0] = D[0];
+  for(int k = 0; k<R; k++)
+  {
+    for(int j=1; j<d; j++)
+    {
+      D1[j] = rowcolsam(D[j]);
+    }
+    for(int i = 0; i<n; i++)
+    {
+      T(k,i) = stat_2(D1,b(i,_));
+    }
+  }
+  return(T);
+}
 
 
 
