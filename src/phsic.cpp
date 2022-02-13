@@ -18,15 +18,16 @@ List median_huristic(List list, NumericVector time){
   NumericMatrix A = list[0];
   int n = A.nrow();
   int i,j,k,l;
-  List s(n-2);
-  for(i = 0; i<n-2;i++){
+  List s(n);
+  for(i = 0; i<n;i++){
     NumericMatrix B(n);
-    for(j = i+1; j<n-1; j++){
+    for(j = 0; j<n-1; j++){
       for(k = j+1; k<n; k++){
         for(l = 0; l<d;l++){
           NumericMatrix A = list[l];
-          B(j,k) = B(j,k) + inp(A(i,_),A(j,_)-A(k,_),time)*inp(A(i,_),A(j,_)-A(k,_),time);
+          B(j,k) = B(j,k) + inp(A(i,_),A(j,_)-A(k,_),time);
         }
+        B(j,k) = B(j,k)*B(j,k);
       }
     }
     s[i] = B;
@@ -34,6 +35,32 @@ List median_huristic(List list, NumericVector time){
   return(s);
 }
 
+//[[Rcpp::export]]
+List median_huristic_2(List list, NumericVector time){
+  int d = list.length();
+  NumericMatrix A = list[0];
+  int n = A.nrow();
+  int i,j,k,l;
+  List L(d);
+  for(l = 0; l<d;l++){
+    NumericMatrix A = list[l];
+    List s(n);
+    for(i = 0; i<n;i++){
+      NumericMatrix B(n);
+      for(j = 0; j<n-1; j++){
+        for(k = j+1; k<n; k++){
+          NumericVector x = A(i,_);
+          NumericVector y = A(j,_)-A(k,_);
+          B(j,k) = inp(x,y,time);
+          B(j,k) = B(j,k)*B(j,k);
+        }
+      }
+      s[i] = B;
+    }
+    L[l] = s;
+  }
+  return(L);
+}
 
 //[[Rcpp::export]]
 NumericMatrix proj_cpp(NumericMatrix x, NumericVector argval){
@@ -184,6 +211,27 @@ double stat(List D, double b)
 }
 
 //[[Rcpp::export]]
+double stat_2(List D, List b)
+{
+  int d = D.length();
+  NumericMatrix A = D[0];
+  int N = A.nrow();
+  NumericVector q(N);
+  for(int i = 0; i<N; i++)
+  {
+    List K(d);
+    for(int j=0; j<d; j++)
+    {
+      NumericMatrix B = D[j];
+      K[j] = gaussian_kernel( B(_,i), b[j]);
+    }
+    q(i) = g_cpp(K);
+  }
+  double g = sumvec(q)/N ;
+  return(g);
+}
+
+//[[Rcpp::export]]
 NumericMatrix rowcolsam(NumericMatrix A)
 {
   int N = A.ncol();
@@ -210,9 +258,10 @@ NumericVector permutation(List D, int R, double b)
   List l(d);
   List K(d);
   List D1(d);
+  D1[0] = D[0];
   for(int k = 0; k<R; k++)
   {
-    for(int j=0; j<d; j++)
+    for(int j=1; j<d; j++)
     {
       D1[j] = rowcolsam(D[j]);
     }
@@ -221,6 +270,29 @@ NumericVector permutation(List D, int R, double b)
   return(T);
 }
 
+
+//[[Rcpp::export]]
+NumericVector permutation_2(List D, int R, List b)
+{
+  int d = D.length();
+  NumericMatrix A = D[0];
+  int N = A.nrow();
+  NumericVector q(N);
+  NumericVector T(R);
+  List l(d);
+  List K(d);
+  List D1(d);
+  D1[0] = D[0];
+  for(int k = 0; k<R; k++)
+  {
+    for(int j=1; j<d; j++)
+    {
+      D1[j] = rowcolsam(D[j]);
+    }
+    T(k) = stat_2(D1,b);
+  }
+  return(T);
+}
 
 //[[Rcpp::export]]
 NumericMatrix multi_permutation(List D, int R, NumericVector b)
@@ -234,9 +306,10 @@ NumericMatrix multi_permutation(List D, int R, NumericVector b)
   List l(d);
   List K(d);
   List D1(d);
+  D1[0] = D[0];
   for(int k = 0; k<R; k++)
   {
-    for(int j=0; j<d; j++)
+    for(int j=1; j<d; j++)
     {
       D1[j] = rowcolsam(D[j]);
     }
