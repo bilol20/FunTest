@@ -1,8 +1,9 @@
 inp = function(x,y,argval){
   return(sum(x[-1]*y[-1]*diff(argval)))
 }
+norm = function(x){ sum(abs(x))}
 
-ker = function(x,y,sigma) return(exp(-(x-y)^2/sigma))
+ker = function(x,y) return(0.5*(norm(x)+norm(y)-norm(x-y)))
 
 kmmd = function(D,n,m){
   T = sum(D[1:n,1:n])/n^2+sum(D[n+1:m,n+1:m])/m^2-2*sum(D[1:n,n+1:m])/n/m
@@ -36,14 +37,14 @@ pMMD.test = function(X,Y,argval, R = 200){
     y1 = S[j,n+1:m]
     return(dist(c(x1,y1))^2)
   }))
-  sigma = median(D)
+ # sigma = median(D)
   L = lapply(1:N, function(k){
     x1 = S[k,1:n]
     y1 = S[k,n+1:m]
     v = c(x1,y1)
     D = sapply(1:N, function(i){
       sapply(1:N, function(j){
-        ker(v[i],v[j],sigma)
+        ker(v[i],v[j])
       })
     })
     return(D)
