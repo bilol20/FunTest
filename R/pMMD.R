@@ -1,9 +1,17 @@
 inp = function(x,y,argval){
   return(sum(x[-1]*y[-1]*diff(argval)))
 }
-norm = function(x){ sum(abs(x))}
+l1norm = function(x){ sum(abs(x))}
+exp_norm = function(x) {
+  d = length(x)
+  sum(1-exp(x^2))/d
+}
 
-ker = function(x,y) return(0.5*(norm(x)+norm(y)-norm(x-y)))
+ker_l2 = function(x,y) return(-sqrt(sum((x-y)^2)))
+ker_l1 = function(x,y) return(-norm(x-y))
+ker_exp = function(x,y) return(-exp_norm(x-y))
+
+
 
 kmmd = function(D,n,m){
   T = sum(D[1:n,1:n])/n^2+sum(D[n+1:m,n+1:m])/m^2-2*sum(D[1:n,n+1:m])/n/m
@@ -22,7 +30,16 @@ rowcolsam = function(A,l){
   return(A1)
 }
 
-pMMD.test = function(X,Y,argval, R = 200){
+pMMD.test = function(X,Y,argval, R = 200, kernel = c("L2","L1","exp")){
+  if(kernel == "L2"){
+    ker = ker_l2
+  }
+  if(kernel == "L1"){
+    ker = ker_l1
+  }
+  if(kernel == "exp"){
+    ker = ker_exp
+  }
   n = nrow(X)
   m = nrow(Y)
   V = rbind(X,Y)
