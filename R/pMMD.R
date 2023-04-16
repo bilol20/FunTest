@@ -1,6 +1,7 @@
 inp = function(x,y,argval){
   return(sum(x[-1]*y[-1]*diff(argval)))
 }
+
 l2norm = function(x){sum(x^2)}
 l1norm = function(x){ sum(abs(x))}
 exp_norm = function(x) {
