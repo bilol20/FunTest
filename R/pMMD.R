@@ -4,14 +4,10 @@ inp = function(x,y,argval){
 
 
 l2norm = function(x){sum(x^2)}
-l1norm = function(x){ sum(abs(x))}
-exp_norm = function(x) {
-  1-exp(-sum(x^2)/2)
-}
 
-ker_l2 = function(x,y) return(-sqrt(sum((x-y)^2)))
-ker_l1 = function(x,y) return(-norm(x-y))
-ker_exp = function(x,y) return(-exp_norm(x-y))
+ker_phi1 = function(x,y) return(-sqrt(l2norm(x-y))/2)
+ker_log = function(x,y) return(-log(1+l2norm(x-y)))
+ker_exp = function(x,y) return(-1+exp(l2norm(x-y)/2))
 
 
 
@@ -32,12 +28,12 @@ rowcolsam = function(A,l){
   return(A1)
 }
 
-pMMD.test = function(X,Y,argval, R = 200, kernel = c("L2","L1","exp")){
+pMMD.test = function(X,Y,argval, R = 200, kernel = c("L2","log","exp")){
   if(kernel == "L2"){
-    ker = ker_l2
+    ker = ker_phi1
   }
-  if(kernel == "L1"){
-    ker = ker_l1
+  if(kernel == "log"){
+    ker = ker_log
   }
   if(kernel == "exp"){
     ker = ker_exp
@@ -51,11 +47,11 @@ pMMD.test = function(X,Y,argval, R = 200, kernel = c("L2","L1","exp")){
       inp(V[x,],V[y,],argval)
     })
   })
-  D = unlist(lapply(1:N, function(j){
-    x1 = S[j,1:n]
-    y1 = S[j,n+1:m]
-    return(dist(c(x1,y1))^2)
-  }))
+  #D = unlist(lapply(1:N, function(j){
+  #  x1 = S[j,1:n]
+ #   y1 = S[j,n+1:m]
+ #   return(dist(c(x1,y1))^2)
+ # }))
  # sigma = median(D)
   L = lapply(1:N, function(k){
     x1 = S[k,1:n]
@@ -68,16 +64,18 @@ pMMD.test = function(X,Y,argval, R = 200, kernel = c("L2","L1","exp")){
     })
     return(D)
   })
-  T = mean(sapply(1:N, function(t){
+  T = sapply(1:N, function(t){
     kmmd(L[[t]],n,m)
-  }))
+  })
+  T = 0.5*mean(T[1:n])+0.5*mean(T[n+1:m])
   T1 = unlist(lapply(1:R, function(i){
     l = sample(N)
-    mean(sapply(1:N, function(t){
+    F = sapply(1:N, function(t){
       D1 = L[[l[t]]]
       D1 = rowcolsam(D1,l)
       return(kmmd(D1,n,m))
-    }))
+    })
+    return(0.5*mean(F[1:n])+0.5*mean(F[n+1:m]))
   }
   ))
   pval = (sum(T1>T)+1)/(R+1)
