@@ -7,7 +7,7 @@ l2norm = function(x){sum(x^2)}
 
 ker_phi1 = function(x,y) return(-sqrt(l2norm(x-y))/2)
 ker_log = function(x,y) return(-log(1+l2norm(x-y)))
-ker_exp = function(x,y) return(-1+exp(l2norm(x-y)/2))
+ker_exp = function(x,y) return(-1+exp(-l2norm(x-y)/2))
 
 
 
