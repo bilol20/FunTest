@@ -92,11 +92,11 @@ pMMD.test = function(X,Y,argval, R = 200, kernel = c("L2","log","exp")){
     kmmd(L[[t]],n,m)
   })
   T = 0.5*mean(T[1:n])+0.5*mean(T[n+1:m])
+  W = replicate(R, sample(N))
   T1 = unlist(lapply(1:R, function(i){
-    l = sample(N)
     F = sapply(1:N, function(t){
-      D1 = L[[l[t]]]
-      D1 = rowcolsam(D1,l)
+      D1 = L[[W[,i][t]]]
+      D1 = D1[W[,i],W[,i]]
       return(kmmd(D1,n,m))
     })
     return(0.5*mean(F[1:n])+0.5*mean(F[n+1:m]))
