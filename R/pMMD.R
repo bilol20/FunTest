@@ -28,6 +28,19 @@ rowcolsam = function(A,l){
   return(A1)
 }
 
+
+Gram.matrix = function(x,ker){
+  N = length(x)
+  A = matrix(0,N,N)
+  for(i in 1:N){
+    for(j in 1:i){
+      A[j,i] = A[i,j] = ker(x[i]-x[j])
+    }
+  }
+  return(A)
+}
+
+
 pMMD.test = function(X,Y,argval, R = 200, kernel = c("L2","log","exp")){
   if(kernel == "L2"){
     ker = ker_phi1
@@ -53,15 +66,26 @@ pMMD.test = function(X,Y,argval, R = 200, kernel = c("L2","log","exp")){
  #   return(dist(c(x1,y1))^2)
  # }))
  # sigma = median(D)
+  #D = unlist(lapply(1:N, function(j){
+  #  x1 = S[j,1:n]
+  #   y1 = S[j,n+1:m]
+  #   return(dist(c(x1,y1))^2)
+  # }))
+  # sigma = median(D)
+  #L = lapply(1:N, function(k){
+  #  x1 = S[k,1:n]
+  # y1 = S[k,n+1:m]
+  #  v = c(x1,y1)
+  #  D = sapply(1:N, function(i){
+  #    sapply(1:N, function(j){
+  #      ker(v[i]-v[j])
+  #    })
+  #  })
+  #  return(D)
+  #})
   L = lapply(1:N, function(k){
-    x1 = S[k,1:n]
-    y1 = S[k,n+1:m]
-    v = c(x1,y1)
-    D = sapply(1:N, function(i){
-      sapply(1:N, function(j){
-        ker(v[i],v[j])
-      })
-    })
+    v = S[k,]
+    D = Gram.matrix(v,ker)
     return(D)
   })
   T = sapply(1:N, function(t){
