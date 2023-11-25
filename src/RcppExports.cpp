@@ -10,6 +10,197 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
+// inp_cpp
+float inp_cpp(const NumericVector& x, const NumericVector& y, const NumericVector& argval);
+RcppExport SEXP _FunTest_inp_cpp(SEXP xSEXP, SEXP ySEXP, SEXP argvalSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const NumericVector& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< const NumericVector& >::type y(ySEXP);
+    Rcpp::traits::input_parameter< const NumericVector& >::type argval(argvalSEXP);
+    rcpp_result_gen = Rcpp::wrap(inp_cpp(x, y, argval));
+    return rcpp_result_gen;
+END_RCPP
+}
+// inp_matrix
+NumericMatrix inp_matrix(const NumericMatrix& V, const NumericVector& argval);
+RcppExport SEXP _FunTest_inp_matrix(SEXP VSEXP, SEXP argvalSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const NumericMatrix& >::type V(VSEXP);
+    Rcpp::traits::input_parameter< const NumericVector& >::type argval(argvalSEXP);
+    rcpp_result_gen = Rcpp::wrap(inp_matrix(V, argval));
+    return rcpp_result_gen;
+END_RCPP
+}
+// l2norm_cpp
+float l2norm_cpp(const NumericVector& x);
+RcppExport SEXP _FunTest_l2norm_cpp(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const NumericVector& >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(l2norm_cpp(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// ker_phi1_cpp
+double ker_phi1_cpp(double x, double y);
+RcppExport SEXP _FunTest_ker_phi1_cpp(SEXP xSEXP, SEXP ySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type x(xSEXP);
+    Rcpp::traits::input_parameter< double >::type y(ySEXP);
+    rcpp_result_gen = Rcpp::wrap(ker_phi1_cpp(x, y));
+    return rcpp_result_gen;
+END_RCPP
+}
+// ker_log_cpp
+double ker_log_cpp(double x, double y);
+RcppExport SEXP _FunTest_ker_log_cpp(SEXP xSEXP, SEXP ySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type x(xSEXP);
+    Rcpp::traits::input_parameter< double >::type y(ySEXP);
+    rcpp_result_gen = Rcpp::wrap(ker_log_cpp(x, y));
+    return rcpp_result_gen;
+END_RCPP
+}
+// ker_exp_cpp
+double ker_exp_cpp(double x, double y);
+RcppExport SEXP _FunTest_ker_exp_cpp(SEXP xSEXP, SEXP ySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type x(xSEXP);
+    Rcpp::traits::input_parameter< double >::type y(ySEXP);
+    rcpp_result_gen = Rcpp::wrap(ker_exp_cpp(x, y));
+    return rcpp_result_gen;
+END_RCPP
+}
+// Gram_matrix_cpp_phi1
+NumericMatrix Gram_matrix_cpp_phi1(const NumericVector& x);
+RcppExport SEXP _FunTest_Gram_matrix_cpp_phi1(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const NumericVector& >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(Gram_matrix_cpp_phi1(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// Gram_matrix_cpp_exp
+NumericMatrix Gram_matrix_cpp_exp(NumericVector x);
+RcppExport SEXP _FunTest_Gram_matrix_cpp_exp(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(Gram_matrix_cpp_exp(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// Gram_matrix_cpp_log
+NumericMatrix Gram_matrix_cpp_log(NumericVector x);
+RcppExport SEXP _FunTest_Gram_matrix_cpp_log(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(Gram_matrix_cpp_log(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// Gram_calc_phi1
+List Gram_calc_phi1(NumericMatrix S);
+RcppExport SEXP _FunTest_Gram_calc_phi1(SEXP SSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type S(SSEXP);
+    rcpp_result_gen = Rcpp::wrap(Gram_calc_phi1(S));
+    return rcpp_result_gen;
+END_RCPP
+}
+// Gram_calc_exp
+List Gram_calc_exp(NumericMatrix S);
+RcppExport SEXP _FunTest_Gram_calc_exp(SEXP SSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type S(SSEXP);
+    rcpp_result_gen = Rcpp::wrap(Gram_calc_exp(S));
+    return rcpp_result_gen;
+END_RCPP
+}
+// Gram_calc_log
+List Gram_calc_log(NumericMatrix S);
+RcppExport SEXP _FunTest_Gram_calc_log(SEXP SSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type S(SSEXP);
+    rcpp_result_gen = Rcpp::wrap(Gram_calc_log(S));
+    return rcpp_result_gen;
+END_RCPP
+}
+// kmmd_cpp
+double kmmd_cpp(const NumericMatrix& D, const int& n, const int& m);
+RcppExport SEXP _FunTest_kmmd_cpp(SEXP DSEXP, SEXP nSEXP, SEXP mSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const NumericMatrix& >::type D(DSEXP);
+    Rcpp::traits::input_parameter< const int& >::type n(nSEXP);
+    Rcpp::traits::input_parameter< const int& >::type m(mSEXP);
+    rcpp_result_gen = Rcpp::wrap(kmmd_cpp(D, n, m));
+    return rcpp_result_gen;
+END_RCPP
+}
+// test
+NumericMatrix test(const NumericMatrix& M, const IntegerVector& ind);
+RcppExport SEXP _FunTest_test(SEXP MSEXP, SEXP indSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const NumericMatrix& >::type M(MSEXP);
+    Rcpp::traits::input_parameter< const IntegerVector& >::type ind(indSEXP);
+    rcpp_result_gen = Rcpp::wrap(test(M, ind));
+    return rcpp_result_gen;
+END_RCPP
+}
+// op1
+double op1(const List L, const IntegerVector& l, int& n, int& m);
+RcppExport SEXP _FunTest_op1(SEXP LSEXP, SEXP lSEXP, SEXP nSEXP, SEXP mSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const List >::type L(LSEXP);
+    Rcpp::traits::input_parameter< const IntegerVector& >::type l(lSEXP);
+    Rcpp::traits::input_parameter< int& >::type n(nSEXP);
+    Rcpp::traits::input_parameter< int& >::type m(mSEXP);
+    rcpp_result_gen = Rcpp::wrap(op1(L, l, n, m));
+    return rcpp_result_gen;
+END_RCPP
+}
+// T_perm
+NumericVector T_perm(const IntegerMatrix& W, List L, int n, int m);
+RcppExport SEXP _FunTest_T_perm(SEXP WSEXP, SEXP LSEXP, SEXP nSEXP, SEXP mSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const IntegerMatrix& >::type W(WSEXP);
+    Rcpp::traits::input_parameter< List >::type L(LSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< int >::type m(mSEXP);
+    rcpp_result_gen = Rcpp::wrap(T_perm(W, L, n, m));
+    return rcpp_result_gen;
+END_RCPP
+}
 // inp
 double inp(NumericVector x, NumericVector y, NumericVector time);
 RcppExport SEXP _FunTest_inp(SEXP xSEXP, SEXP ySEXP, SEXP timeSEXP) {
@@ -239,6 +430,22 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_FunTest_inp_cpp", (DL_FUNC) &_FunTest_inp_cpp, 3},
+    {"_FunTest_inp_matrix", (DL_FUNC) &_FunTest_inp_matrix, 2},
+    {"_FunTest_l2norm_cpp", (DL_FUNC) &_FunTest_l2norm_cpp, 1},
+    {"_FunTest_ker_phi1_cpp", (DL_FUNC) &_FunTest_ker_phi1_cpp, 2},
+    {"_FunTest_ker_log_cpp", (DL_FUNC) &_FunTest_ker_log_cpp, 2},
+    {"_FunTest_ker_exp_cpp", (DL_FUNC) &_FunTest_ker_exp_cpp, 2},
+    {"_FunTest_Gram_matrix_cpp_phi1", (DL_FUNC) &_FunTest_Gram_matrix_cpp_phi1, 1},
+    {"_FunTest_Gram_matrix_cpp_exp", (DL_FUNC) &_FunTest_Gram_matrix_cpp_exp, 1},
+    {"_FunTest_Gram_matrix_cpp_log", (DL_FUNC) &_FunTest_Gram_matrix_cpp_log, 1},
+    {"_FunTest_Gram_calc_phi1", (DL_FUNC) &_FunTest_Gram_calc_phi1, 1},
+    {"_FunTest_Gram_calc_exp", (DL_FUNC) &_FunTest_Gram_calc_exp, 1},
+    {"_FunTest_Gram_calc_log", (DL_FUNC) &_FunTest_Gram_calc_log, 1},
+    {"_FunTest_kmmd_cpp", (DL_FUNC) &_FunTest_kmmd_cpp, 3},
+    {"_FunTest_test", (DL_FUNC) &_FunTest_test, 2},
+    {"_FunTest_op1", (DL_FUNC) &_FunTest_op1, 4},
+    {"_FunTest_T_perm", (DL_FUNC) &_FunTest_T_perm, 4},
     {"_FunTest_inp", (DL_FUNC) &_FunTest_inp, 3},
     {"_FunTest_median_huristic", (DL_FUNC) &_FunTest_median_huristic, 2},
     {"_FunTest_median_huristic_2", (DL_FUNC) &_FunTest_median_huristic_2, 2},
