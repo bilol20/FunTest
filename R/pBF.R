@@ -3,7 +3,7 @@ pBF.test = function(X,Y,argval, R = 200, kernel = c("L2","log","exp")){
   m = nrow(Y)
   V = rbind(X,Y)
   N = nrow(V)
-  S = inp_matrix(V, grid)
+  S = inp_matrix(V, argval)
 
   if(kernel == "L2"){
     L = Gram_calc_phi1(S)
@@ -19,8 +19,6 @@ pBF.test = function(X,Y,argval, R = 200, kernel = c("L2","log","exp")){
   })
   T = 0.5*mean(T[1:n])+0.5*mean(T[n+1:m])
   W = replicate(R, sample(N))-1
-
-  #T1 = T_perm(W,L,n,m)
 
   T1 = T_perm(W,L,n,m)
 
